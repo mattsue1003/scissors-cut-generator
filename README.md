@@ -2,7 +2,14 @@
 
 給幼兒園教保員使用的剪刀練習工具：安全守則、五步引導法、五級分級練習單生成器與配套教案。
 
-線上版本（Claude 設計畫布）：https://claude.ai/artifact/N4Jb3i2cby9WtcXbr5VteX
+## 線上試用
+
+- 生成器：https://mattsue1003.github.io/scissors-cut-generator/
+- A4 安全約定海報：https://mattsue1003.github.io/scissors-cut-generator/poster.html
+
+（需先在 GitHub 的 Settings → Pages 開啟，見下方「發布」。）
+
+Claude 設計畫布版本：https://claude.ai/artifact/N4Jb3i2cby9WtcXbr5VteX
 
 ## 功能
 
@@ -23,11 +30,21 @@
 
 | 路徑 | 說明 |
 | --- | --- |
+| `index.html` | 生成器網頁（可直接開啟，由 `design/Main.dc.html` 產生） |
+| `poster.html` | A4 安全約定海報（由 `design/SafetyPoster.dc.html` 產生） |
 | `design/canvas.json` | 畫布索引（各畫板位置與設定） |
 | `design/Main.dc.html` | 生成器網頁（互動畫板） |
 | `design/SafetyPoster.dc.html` | A4 安全約定海報 |
 | `images/classroom.jpg` | 主視覺水彩插畫（Canva 生成） |
 | `images/hero.svg` | 手繪向量剪刀插畫（備用） |
+| `vendor/` | jsPDF 4.2.1、PptxGenJS 4.0.1（MIT 授權，附授權檔） |
+| `tools/build_standalone.py` | 把設計檔轉成一般網頁 |
+| `promo/` | 臉書 1:1 宣傳圖與貼文文案 |
 
 `.dc.html` 是 Claude 設計畫布的格式，需要在畫布中開啟才能正常顯示與操作。
 檔案中的 `/_blob/...` 網址指向畫布上傳的資源：插圖，以及 PDF／PPT 匯出使用的 jsPDF 4.2.1 與 PptxGenJS 4.0.1。
+
+## 修改與發布
+
+1. 修改 `design/` 裡的設計檔後，執行 `python3 tools/build_standalone.py` 重新產生 `index.html` 與 `poster.html`。
+2. 第一次發布：GitHub 專案頁 → Settings → Pages → Source 選「Deploy from a branch」，Branch 選放這些檔案的分支、資料夾選 `/ (root)` → Save。約 1–2 分鐘後網址生效。
