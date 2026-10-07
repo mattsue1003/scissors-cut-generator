@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>小剪刀練習單生成器</title>
+<script src="./support.js"></script>
+<script src="/_blob/5035b591407472fdbbe96a9567600589"></script>
+<script src="/_blob/2d547069a9ac516de225c37563b79edb"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap">
+<style>
+body{margin:0;background:#F4F7F2;color:#1F2A44;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+a{color:#B83A24}a:hover{color:#8F2A18}
+.pill{min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid #CBD3C6;background:#FFFFFF;color:#1F2A44;font:inherit;font-size:15px;font-weight:500;cursor:pointer}
+.pill:hover{border-color:#1F2A44}
+.pill.on{background:#1F2A44;border-color:#1F2A44;color:#FFFFFF}
+.lvcard{display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:20px;background:#FFFFFF;border:2px solid #E1E7DC;text-decoration:none;color:#1F2A44;min-width:0}
+.lvcard:hover{border-color:#1F2A44;color:#1F2A44}
+.lvcard.on{border-color:#1F2A44;box-shadow:0 0 0 3px #F6B93B}
+.navlink{text-decoration:none;color:#1F2A44;font-weight:500;padding:10px 6px}
+.navlink:hover{color:#B83A24}
+.printbtn{min-height:52px;padding:12px 24px;border-radius:14px;border:none;background:#C2412B;color:#FFFFFF;font:inherit;font-size:17px;font-weight:700;cursor:pointer}
+.printbtn:hover{background:#9E3020}
+.dlbtn{flex:1 1 140px;min-height:52px;padding:10px 16px;border-radius:14px;border:2px solid #1F2A44;background:#FFFFFF;color:#1F2A44;font:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.dlbtn:hover{background:#1F2A44;color:#FFFFFF}
+.dlbtn:disabled{opacity:0.5;cursor:wait}
+input.nm{min-height:44px;box-sizing:border-box;width:100%;padding:8px 14px;border-radius:12px;border:2px solid #CBD3C6;font:inherit;font-size:16px;color:#1F2A44;background:#FFFFFF}
+input.nm:focus{outline:3px solid #F6B93B;border-color:#1F2A44}
+input.rng{width:100%;min-height:44px;accent-color:#1F2A44}
+.rows{flex:1;display:flex;flex-direction:column;justify-content:space-around;min-height:0}
+@page{size:A4;margin:0}
+@media print{
+  body{background:#FFFFFF}
+  body *{visibility:hidden}
+  .sheet,.sheet *{visibility:visible}
+  .sheet{position:absolute;left:0;top:0;width:210mm !important;height:297mm !important;max-width:none !important;border-radius:0 !important;box-shadow:none !important;border:none !important}
+}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F7F2">
+
+  <!-- NAV -->
+  <header style="position: relative; background: #FFFFFF; border-bottom: 2px solid #E1E7DC">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 12px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px">
+      <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1F2A44">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" stroke="#1F2A44" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="28" r="6"></circle><circle cx="11" cy="12" r="6"></circle><path d="M16 15 L36 30"></path><path d="M16 25 L36 10"></path></svg>
+        <span style="font-family: 'LXGW WenKai TC', serif; font-size: 22px; font-weight: 700">小剪刀練習單</span>
+      </a>
+      <nav aria-label="頁面導覽" style="display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 15px">
+        <a class="navlink" href="#intro">前言</a>
+        <a class="navlink" href="#safety">安全守則</a>
+        <a class="navlink" href="#guide">五步引導</a>
+        <a class="navlink" href="#levels">能力分級</a>
+        <a class="navlink" href="#generator">生成練習單</a>
+        <a class="navlink" href="#lesson">教案</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" style="max-width: 1180px; margin: 0 auto; padding: 48px 20px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
+    <div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <p style="margin: 0; display: inline-flex; align-self: flex-start; padding: 6px 14px; border-radius: 999px; background: #FCE7B8; font-size: 14px; font-weight: 700; letter-spacing: 0.08em">給幼兒園教保員・2–6 歲適用</p>
+      <h1 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: clamp(36px, 5vw, 60px); line-height: 1.15; font-weight: 700">孩子想拿剪刀？<br>那就一起，<span style="color: #C2412B">安全地</span>學會它。</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.8; color: #3C4760">先讀安全守則與五步引導，再依孩子的能力選一個等級，一鍵產生可列印的剪紙練習單，並附上 30 分鐘的完整教案。</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <a href="#safety" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 14px; background: #1F2A44; color: #FFFFFF; font-weight: 700; text-decoration: none">先看安全守則</a>
+        <a href="#generator" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 14px; background: #FFFFFF; border: 2px solid #1F2A44; color: #1F2A44; font-weight: 700; text-decoration: none">直接生成練習單</a>
+      </div>
+    </div>
+    <div style="flex: 1 1 440px; min-width: 0">
+      <img src="/_blob/b81c5ad41c5b3691b830031d44b94cc4" alt="水彩插畫：教保員坐在桌邊，陪三位幼兒拿著兒童剪刀沿虛線剪星星和葉子，桌上有收集紙片的托盤" style="width: 100%; height: auto; display: block; border-radius: 24px; box-shadow: 0 16px 40px rgba(31, 42, 68, 0.14)">
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section id="intro" style="max-width: 1180px; margin: 0 auto; padding: 40px 20px">
+    <div style="background: #FFFFFF; border-radius: 28px; padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+        <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #C2412B">前言・寫給教保員</p>
+        <h2 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 36px; line-height: 1.3">好奇心是最好的起點，不必禁止，而是陪著練習</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.9; color: #3C4760">孩子對剪刀感興趣，正是發展精細動作的好時機。與其把剪刀收起來，不如在「看得見的地方、用對的工具、照著步驟」讓孩子練習。剪刀練習需要雙手分工合作，也鍛鍊手部小肌肉，是日後握筆、寫字的重要準備。</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+        <div style="padding: 20px; border-radius: 18px; background: #EAF3EC; display: flex; flex-direction: column; gap: 8px">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#2F6B3E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="5"></circle><path d="M2 16 C 7 8, 25 8, 30 16 C 25 24, 7 24, 2 16 Z"></path></svg>
+          <h3 style="margin: 0; font-size: 18px">手眼協調</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #3C4760">眼睛看著線，手跟著走，練習專注與控制。</p>
+        </div>
+        <div style="padding: 20px; border-radius: 18px; background: #E5EFF8; display: flex; flex-direction: column; gap: 8px">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#2B5F8C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22 C 4 12, 10 8, 14 8 L14 24"></path><path d="M28 22 C 28 12, 22 8, 18 8 L18 24"></path></svg>
+          <h3 style="margin: 0; font-size: 18px">雙手分工</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #3C4760">一手剪、一手扶紙轉紙，建立慣用手與輔助手。</p>
+        </div>
+        <div style="padding: 20px; border-radius: 18px; background: #FDF0D4; display: flex; flex-direction: column; gap: 8px">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#8A5A00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26 L22 10"></path><path d="M20 6 L26 12"></path><path d="M6 26 L4 28"></path></svg>
+          <h3 style="margin: 0; font-size: 18px">握筆準備</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #3C4760">開合動作強化手掌與手指力量，為寫字打底。</p>
+        </div>
+        <div style="padding: 20px; border-radius: 18px; background: #FBE3DD; display: flex; flex-direction: column; gap: 8px">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#9E3020" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L19 12 L28 12 L21 18 L24 27 L16 22 L8 27 L11 18 L4 12 L13 12 Z"></path></svg>
+          <h3 style="margin: 0; font-size: 18px">自信與規則</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #3C4760">被信任使用「真工具」，孩子更願意遵守約定。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section id="safety" style="max-width: 1180px; margin: 0 auto; padding: 40px 20px">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+        <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #C2412B">第一步・如何安全使用</p>
+        <h2 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 36px; line-height: 1.3">剪刀六大約定</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.8; color: #3C4760">第一次拿剪刀前，先和孩子一起念、一起做動作。約定可以印成海報貼在美勞角（見右側 A4 海報）。</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+        <div style="background: #FFFFFF; border-radius: 22px; padding: 22px; display: flex; gap: 16px; align-items: flex-start">
+          <div style="flex: 0 0 56px; height: 56px; border-radius: 16px; background: #FCE7B8; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="23" r="4.5"></circle><circle cx="8" cy="9" r="4.5"></circle><path d="M12 11 L27 22 Q 29 24 26 24"></path><path d="M12 21 L27 10 Q 29 8 26 8"></path></svg></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 19px">1. 選對剪刀</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">使用圓頭兒童安全剪刀，刀刃短、握孔大小適合小手。左撇子孩子請提供左手剪刀。</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 22px; padding: 22px; display: flex; gap: 16px; align-items: flex-start">
+          <div style="flex: 0 0 56px; height: 56px; border-radius: 16px; background: #D6E7F5; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 V18 H24"></path><path d="M8 18 V28"></path><path d="M24 18 V28"></path><path d="M8 13 H22"></path></svg></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 19px">2. 坐在桌邊才剪</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">剪刀只在桌邊坐好時使用。拿著剪刀不走動、不跑跳、不揮舞。</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 22px; padding: 22px; display: flex; gap: 16px; align-items: flex-start">
+          <div style="flex: 0 0 56px; height: 56px; border-radius: 16px; background: #CFE6D3; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 V26"></path><path d="M9 19 L16 26 L23 19"></path></svg></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 19px">3. 要移動時，刀尖朝下</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">合起刀口、手握住刀刃部分，刀尖朝地板，貼在身體旁慢慢走。</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 22px; padding: 22px; display: flex; gap: 16px; align-items: flex-start">
+          <div style="flex: 0 0 56px; height: 56px; border-radius: 16px; background: #FBE3DD; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 H24"></path><path d="M19 7 L24 12 L19 17"></path><path d="M28 22 H8"></path><path d="M13 17 L8 22 L13 27"></path></svg></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 19px">4. 遞剪刀：握柄給對方</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">先合起剪刀，自己握住刀刃，把握柄那一端交給別人。</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 22px; padding: 22px; display: flex; gap: 16px; align-items: flex-start">
+          <div style="flex: 0 0 56px; height: 56px; border-radius: 16px; background: #FCE7B8; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H20 L26 10 V28 H8 Z"></path><path d="M20 4 V10 H26"></path><path d="M12 17 H22" stroke-dasharray="3 3"></path></svg></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 19px">5. 剪刀嘴巴只吃紙</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">只剪老師給的紙。不剪頭髮、衣服、身體，也不剪別人的東西。</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 22px; padding: 22px; display: flex; gap: 16px; align-items: flex-start">
+          <div style="flex: 0 0 56px; height: 56px; border-radius: 16px; background: #D6E7F5; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 H25 L23 28 H9 Z"></path><path d="M13 12 V5"></path><path d="M19 12 V5"></path></svg></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 19px">6. 用完送剪刀回家</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">合起剪刀，尖端朝下放回剪刀筒；紙屑放進紙屑盒，桌面恢復乾淨。</p></div>
+        </div>
+      </div>
+      <div style="background: #1F2A44; color: #FFFFFF; border-radius: 22px; padding: 24px clamp(20px, 3vw, 32px); display: flex; flex-wrap: wrap; gap: 16px 40px">
+        <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+          <h3 style="margin: 0; font-size: 18px; color: #F6B93B">教保員的管理重點</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.75">初次練習建議 1 位成人帶 4–6 位幼兒，以小組方式進行。</p>
+        </div>
+        <ul style="flex: 2 1 420px; margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.9">
+          <li>發多少、收多少：活動前後點數剪刀數量。</li>
+          <li>剪刀筒放在成人可視範圍，不放在孩子隨手可拿的地方。</li>
+          <li>違反約定時，平靜地請孩子先把剪刀「送回家」，休息後再試。</li>
+          <li>定期檢查剪刀：鬆脫、生鏽或刀尖變利的立即汰換。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDE -->
+  <section id="guide" style="max-width: 1180px; margin: 0 auto; padding: 40px 20px">
+    <div style="background: #FFFFFF; border-radius: 28px; padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 32px">
+      <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #C2412B">第二步・如何引導</p>
+        <h2 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 36px; line-height: 1.3">五步引導法</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.8; color: #3C4760">示範時坐在孩子旁邊、和孩子面向同一方向，孩子才不會看成「鏡像」動作。</p>
+        <svg viewBox="0 0 360 260" style="width: 100%; max-width: 420px; height: auto" role="img" aria-label="剪刀握法示意：大拇指放上方小洞，中指與無名指放下方大洞，食指在外扶著">
+          <rect x="0" y="0" width="360" height="260" rx="22" fill="#FDF6E6"></rect>
+          <g transform="translate(150 130)">
+            <path d="M0 -8 L170 -36 Q 186 -36 172 -24 L0 6 Z" fill="#FFFFFF" stroke="#1F2A44" stroke-width="4" stroke-linejoin="round"></path>
+            <path d="M0 8 L170 36 Q 186 36 172 24 L0 -6 Z" fill="#F4F6FA" stroke="#1F2A44" stroke-width="4" stroke-linejoin="round"></path>
+            <circle cx="-56" cy="-36" r="28" fill="none" stroke="#C2412B" stroke-width="16"></circle>
+            <ellipse cx="-62" cy="40" rx="42" ry="30" fill="none" stroke="#4A90C9" stroke-width="16"></ellipse>
+            <path d="M-30 -22 L0 -4" stroke="#C2412B" stroke-width="14" stroke-linecap="round"></path>
+            <path d="M-26 26 L0 4" stroke="#4A90C9" stroke-width="14" stroke-linecap="round"></path>
+            <circle cx="0" cy="0" r="10" fill="#F6B93B" stroke="#1F2A44" stroke-width="4"></circle>
+          </g>
+          <path d="M94 94 L60 50" stroke="#1F2A44" stroke-width="2" stroke-dasharray="4 4"></path>
+          <text x="16" y="40" font-size="17" font-weight="700" fill="#1F2A44" font-family="Noto Sans TC, sans-serif">大拇指洞（小）</text>
+          <path d="M88 190 L60 222" stroke="#1F2A44" stroke-width="2" stroke-dasharray="4 4"></path>
+          <text x="16" y="244" font-size="17" font-weight="700" fill="#1F2A44" font-family="Noto Sans TC, sans-serif">中指＋無名指（大）</text>
+          <text x="220" y="70" font-size="17" font-weight="700" fill="#1F2A44" font-family="Noto Sans TC, sans-serif">剪刀嘴巴</text>
+          <path d="M250 78 L262 104" stroke="#1F2A44" stroke-width="2" stroke-dasharray="4 4"></path>
+        </svg>
+        <p style="margin: 0; padding: 14px 18px; border-radius: 14px; background: #FCE7B8; font-family: 'LXGW WenKai TC', serif; font-size: 20px; line-height: 1.6">口訣：「大拇指朝天空，嘴巴張開、閉起來，一口一口往前走。」</p>
+      </div>
+      <ol style="flex: 1.3 1 420px; min-width: 0; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+        <li style="display: flex; gap: 16px; padding: 18px; border-radius: 18px; background: #F4F7F2">
+          <span style="flex: 0 0 44px; height: 44px; border-radius: 50%; background: #1F2A44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px">1</span>
+          <div style="display: flex; flex-direction: column; gap: 4px"><h3 style="margin: 0; font-size: 18px">認識剪刀朋友</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">介紹剪刀的「嘴巴」（刀刃）和「耳朵」（握孔）。說好：嘴巴只吃紙。</p></div>
+        </li>
+        <li style="display: flex; gap: 16px; padding: 18px; border-radius: 18px; background: #F4F7F2">
+          <span style="flex: 0 0 44px; height: 44px; border-radius: 50%; background: #1F2A44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px">2</span>
+          <div style="display: flex; flex-direction: column; gap: 4px"><h3 style="margin: 0; font-size: 18px">正確握法</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">大拇指放上面的小洞、朝向天空；中指（和無名指）放下面的大洞；食指在外面扶著。手肘靠近身體。</p></div>
+        </li>
+        <li style="display: flex; gap: 16px; padding: 18px; border-radius: 18px; background: #F4F7F2">
+          <span style="flex: 0 0 44px; height: 44px; border-radius: 50%; background: #1F2A44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px">3</span>
+          <div style="display: flex; flex-direction: column; gap: 4px"><h3 style="margin: 0; font-size: 18px">開合暖身</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">先空剪「打開—閉起來」；用夾子夾棉球、用剪刀剪黏土條或吸管，感受開合的力氣。</p></div>
+        </li>
+        <li style="display: flex; gap: 16px; padding: 18px; border-radius: 18px; background: #F4F7F2">
+          <span style="flex: 0 0 44px; height: 44px; border-radius: 50%; background: #1F2A44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px">4</span>
+          <div style="display: flex; flex-direction: column; gap: 4px"><h3 style="margin: 0; font-size: 18px">輔助手扶紙</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">另一隻手拿住紙的邊邊，手指放在剪刀嘴巴的旁邊或後面，不要擋在前面。</p></div>
+        </li>
+        <li style="display: flex; gap: 16px; padding: 18px; border-radius: 18px; background: #F4F7F2">
+          <span style="flex: 0 0 44px; height: 44px; border-radius: 50%; background: #1F2A44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px">5</span>
+          <div style="display: flex; flex-direction: column; gap: 4px"><h3 style="margin: 0; font-size: 18px">沿線前進</h3><p style="margin: 0; font-size: 15px; line-height: 1.75; color: #3C4760">嘴巴張大大、對準線，一口一口往前走。要轉彎時：紙轉，剪刀不轉。</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- LEVELS -->
+  <section id="levels" style="max-width: 1180px; margin: 0 auto; padding: 40px 20px">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+        <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #C2412B">第三步・分級練習</p>
+        <h2 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 36px; line-height: 1.3">五個等級，一步一步晉級</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.8; color: #3C4760">年齡僅供參考，請依孩子實際表現決定。看到「晉級訊號」再往下一級；點選卡片即可產生該級練習單。</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+        <sc-for list="{{levels}}" as="l" hint-placeholder-count="5">
+          <a href="#generator" class="{{l.cls}}" onClick="{{l.pick}}">
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+              <span style="font-size: 13px; font-weight: 900; letter-spacing: 0.1em">LV.{{l.n}}</span>
+              <span style="font-size: 13px; color: #55607A">{{l.age}}</span>
+            </span>
+            <svg viewBox="0 0 160 56" style="width: 100%; height: auto; display: block; border-radius: 10px; background: #F4F7F2"><path d="{{l.mini}}" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"></path></svg>
+            <span style="font-family: 'LXGW WenKai TC', serif; font-size: 24px; font-weight: 700">{{l.name}}</span>
+            <span style="font-size: 14px; line-height: 1.65; color: #3C4760">{{l.skill}}</span>
+            <span style="font-size: 13px; line-height: 1.6; padding: 8px 10px; border-radius: 10px; background: #EAF3EC; color: #24502F">晉級訊號：{{l.ready}}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENERATOR -->
+  <section id="generator" style="max-width: 1180px; margin: 0 auto; padding: 40px 20px">
+    <div style="background: #FFFFFF; border-radius: 28px; padding: clamp(20px, 3.5vw, 40px); display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+      <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #C2412B">練習單生成器</p>
+          <h2 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 32px; line-height: 1.3">選一選，馬上印</h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; font-weight: 700">等級</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{levels}}" as="l" hint-placeholder-count="5">
+              <button type="button" class="{{l.pillCls}}" onClick="{{l.pick}}">Lv{{l.n}} {{l.name}}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; font-weight: 700">主題故事</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{themes}}" as="t" hint-placeholder-count="3">
+              <button type="button" class="{{t.cls}}" onClick="{{t.pick}}">{{t.name}}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; font-weight: 700">練習條數</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{rowOpts}}" as="r" hint-placeholder-count="4">
+              <button type="button" class="{{r.cls}}" onClick="{{r.pick}}">{{r.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; font-weight: 700">線條粗細</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{weights}}" as="w" hint-placeholder-count="3">
+              <button type="button" class="{{w.cls}}" onClick="{{w.pick}}">{{w.label}}</button>
+            </sc-for>
+          </div>
+          <span style="font-size: 13px; line-height: 1.6; color: #55607A">剛開始用粗線（容錯大），熟練後換細線增加挑戰。</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; font-weight: 700">線條樣式</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{dashOpts}}" as="d" hint-placeholder-count="2">
+              <button type="button" class="{{d.cls}}" onClick="{{d.pick}}">{{d.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 16px; background: #FDF6E6">
+          <span style="font-size: 15px; font-weight: 700">剪刀路（黃色範圍）</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{bandOpts}}" as="b" hint-placeholder-count="2">
+              <button type="button" class="{{b.cls}}" onClick="{{b.pick}}">{{b.label}}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{band}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <label for="bandW" style="font-size: 14px; display: flex; justify-content: space-between"><span>路寬</span><span style="font-weight: 700">約 {{bandMm}} 公釐</span></label>
+              <input id="bandW" class="rng" type="range" min="14" max="52" step="2" value="{{bandW}}" onChange="{{onBandW}}">
+            </div>
+          </sc-if>
+          <span style="font-size: 13px; line-height: 1.6; color: #55607A">虛線中間是目標，只要剪在黃色範圍裡就算成功。剛開始用寬一點，再慢慢縮窄。</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 16px; background: #FBE9E5">
+          <span style="font-size: 15px; font-weight: 700">引導線（從紙邊剪進來）</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{leadOpts}}" as="g" hint-placeholder-count="2">
+              <button type="button" class="{{g.cls}}" onClick="{{g.pick}}">{{g.label}}</button>
+            </sc-for>
+          </div>
+          <span style="font-size: 13px; line-height: 1.6; color: #55607A">{{leadHint}}</span>
+        </div>
+
+        <sc-if value="{{clamped}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #55607A">條數較多，練習線已自動等比例縮小，才能放進一張 A4。想要線條大一點，可以減少條數或把路寬調窄。</p>
+        </sc-if>
+
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <label for="childName" style="font-size: 15px; font-weight: 700">幼兒姓名（可留空，讓孩子自己寫）</label>
+          <input id="childName" class="nm" type="text" placeholder="例如：小安" value="{{name}}" onChange="{{onName}}">
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <button type="button" class="printbtn" onClick="{{doPrint}}">列印這張練習單（A4）</button>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <button type="button" class="dlbtn" onClick="{{doPdf}}" disabled="{{busy}}">下載 PDF</button>
+            <button type="button" class="dlbtn" onClick="{{doPpt}}" disabled="{{busy}}">下載 PPT（可編輯）</button>
+          </div>
+          <sc-if value="{{hasMsg}}" hint-placeholder-val="{{ false }}">
+            <p role="status" style="margin: 0; font-size: 14px; font-weight: 700; color: #1F2A44">{{msg}}</p>
+          </sc-if>
+          <span style="font-size: 13px; line-height: 1.6; color: #55607A">PPT 共三頁：練習單、教案、安全約定。文字都可以直接修改，每條練習線和插圖都是獨立圖片，可以拖曳、縮放。</span>
+          <span style="font-size: 13px; line-height: 1.6; color: #55607A">列印時只會印出右側練習單。建議使用 120 磅以上的厚紙，較好剪、不易皺。</span>
+        </div>
+      </div>
+
+      <!-- SHEET PREVIEW -->
+      <div style="flex: 1.2 1 440px; min-width: 0; display: flex; justify-content: center; padding: 20px; border-radius: 22px; background: #E9EDE5">
+        <div class="sheet" style="width: 100%; max-width: 560px; aspect-ratio: 210 / 297; box-sizing: border-box; background: #FFFFFF; border-radius: 6px; box-shadow: 0 12px 30px rgba(31, 42, 68, 0.16); padding: 16px 0 12px; display: flex; flex-direction: column; gap: 6px; font-family: 'Noto Sans TC', sans-serif; color: #1F2A44; overflow: hidden">
+          <div style="padding: 0 22px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 4px 14px; font-size: 12px">
+            <span style="font-family: 'LXGW WenKai TC', serif; font-size: 17px; font-weight: 700; white-space: nowrap">剪刀小高手・Lv{{lv.n}} {{lv.name}}</span>
+            <span style="flex: 1 1 120px; display: flex; gap: 4px; align-items: flex-end">姓名<span style="flex: 1; border-bottom: 1.2px solid #1F2A44; min-height: 16px; padding-left: 4px; font-family: 'LXGW WenKai TC', serif; font-size: 14px">{{name}}</span></span>
+            <span style="flex: 0 1 90px; display: flex; gap: 4px; align-items: flex-end">日期<span style="flex: 1; border-bottom: 1.2px solid #1F2A44; min-height: 16px"></span></span>
+          </div>
+          <p style="margin: 0; padding: 0 22px; font-size: 11px; line-height: 1.5; color: #3C4760">{{story}}</p>
+          <div class="rows">
+            <sc-for list="{{sheetRows}}" as="row" hint-placeholder-count="4">
+              <svg viewBox="{{row.vb}}" style="width: 100%; height: auto; display: block">
+                <rect x="60" y="{{row.bandY}}" width="400" height="52" rx="4" fill="#FCE7B8" opacity="{{row.bandOp}}"></rect>
+                <path d="{{row.pathBand}}" fill="none" stroke="#FFD65A" stroke-width="{{bandW}}" stroke-linecap="round" stroke-linejoin="round" opacity="{{bandOp}}"></path>
+                <path d="{{row.lead}}" fill="none" stroke="#E8553D" stroke-width="{{sw}}" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="{{dash}}" opacity="{{leadOp}}"></path>
+                <path d="{{row.arrow}}" fill="#E8553D" opacity="{{leadOp}}"></path>
+                <path d="{{row.d}}" fill="none" stroke="#1F2A44" stroke-width="{{sw}}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="{{dash}}"></path>
+                <g transform="{{row.startT}}" opacity="{{row.iconOp}}"><path d="{{theme.startD}}" fill="{{theme.startFill}}" stroke="#1F2A44" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path></g>
+                <g transform="{{row.endT}}" opacity="{{row.iconOp}}"><path d="{{theme.endD}}" fill="{{theme.endFill}}" stroke="#1F2A44" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path></g>
+                <g transform="{{row.scT}}" opacity="{{row.scOp}}"><path d="M0 4 a4 4 0 1 0 0.1 0 M0 16 a4 4 0 1 0 0.1 0 M4 7 L18 14 M4 17 L18 10" fill="none" stroke="#C2412B" stroke-width="2" stroke-linecap="round"></path></g>
+              </svg>
+            </sc-for>
+          </div>
+          <div style="padding: 6px 22px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px dashed #9AA3B5; font-size: 10px; color: #3C4760">
+            <span style="display: flex; align-items: center; gap: 4px">我做到了
+              <svg width="50" height="15" viewBox="0 0 66 20" fill="none" stroke="#1F2A44" stroke-width="1.6" stroke-linejoin="round"><path d="M10 1 L12.6 7 L19 7.4 L14 11.6 L15.7 18 L10 14.5 L4.3 18 L6 11.6 L1 7.4 L7.4 7 Z"></path><path d="M33 1 L35.6 7 L42 7.4 L37 11.6 L38.7 18 L33 14.5 L27.3 18 L29 11.6 L24 7.4 L30.4 7 Z"></path><path d="M56 1 L58.6 7 L65 7.4 L60 11.6 L61.7 18 L56 14.5 L50.3 18 L52 11.6 L47 7.4 L53.4 7 Z"></path></svg>
+            </span>
+            <span>大拇指朝天空，一口一口往前走</span>
+            <span>老師：＿＿＿</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON -->
+  <section id="lesson" style="max-width: 1180px; margin: 0 auto; padding: 40px 20px 72px">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+        <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #C2412B">配套教案・依上方選擇的等級自動切換</p>
+        <h2 style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 36px; line-height: 1.3">Lv{{lv.n}}「{{lesson.title}}」</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.8; color: #3C4760">適用：{{lv.age}}・時間：30 分鐘・人數：小組 4–6 人</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px">
+        <div style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 19px">教學目標</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.85; color: #3C4760">
+            <sc-for list="{{lesson.goals}}" as="g" hint-placeholder-count="3"><li>{{g}}</li></sc-for>
+          </ul>
+          <h3 style="margin: 8px 0 0; font-size: 19px">準備材料</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.85; color: #3C4760">
+            <sc-for list="{{lesson.materials}}" as="m" hint-placeholder-count="4"><li>{{m}}</li></sc-for>
+          </ul>
+        </div>
+        <div style="flex: 2 1 480px; min-width: 0; background: #FFFFFF; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+          <h3 style="margin: 0; font-size: 19px">活動流程</h3>
+          <sc-for list="{{lesson.flow}}" as="f" hint-placeholder-count="4">
+            <div style="display: flex; gap: 16px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #F4F7F2">
+              <span style="flex: 0 0 76px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">{{f.stage}}</span><span style="font-size: 13px; color: #55607A">{{f.min}} 分鐘</span></span>
+              <span style="font-size: 15px; line-height: 1.75; color: #3C4760">{{f.text}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px">
+        <div style="flex: 1 1 300px; min-width: 0; background: #FCE7B8; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 19px">引導語（照著說就好）</h3>
+          <sc-for list="{{lesson.lines}}" as="s" hint-placeholder-count="3">
+            <p style="margin: 0; font-family: 'LXGW WenKai TC', serif; font-size: 19px; line-height: 1.6">「{{s}}」</p>
+          </sc-for>
+        </div>
+        <div style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 19px">觀察評量</h3>
+          <sc-for list="{{lesson.observe}}" as="o" hint-placeholder-count="4">
+            <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.6; color: #3C4760"><span style="flex: 0 0 18px; height: 18px; margin-top: 3px; border: 2px solid #1F2A44; border-radius: 4px; box-sizing: border-box"></span>{{o}}</div>
+          </sc-for>
+        </div>
+        <div style="flex: 1 1 300px; min-width: 0; background: #CFE6D3; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 19px">延伸活動</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.85">
+            <sc-for list="{{lesson.extend}}" as="x" hint-placeholder-count="2"><li>{{x}}</li></sc-for>
+          </ul>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.7; color: #55607A">本頁內容為一般教學參考。若孩子有特殊需求（例如手部肌力較弱、動作協調困難），可改用彈簧輔助剪刀，並與職能治療師討論。</p>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":6200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lv: 2, theme: 'ocean', rows: 4, weight: 'thick', dashed: true, name: '', band: false, bandW: 30, lead: false, busy: false, msg: '' };
+  }
+
+  // 座標：紙張左邊緣 x=-20、右邊緣 x=540（列寬即整張紙寬）
+  makeRow(lv, i, H, c, opt) {
+    const lead = opt.lead;
+    const L = opt.L, R = opt.R;
+    let d = '', ld = '', arrow = '';
+    let sx = 70, sy = c;
+    const arrowIn = (x, y, dir) => dir > 0
+      ? 'M' + (x + 2) + ' ' + (y - 22) + ' L' + (x + 16) + ' ' + (y - 15) + ' L' + (x + 2) + ' ' + (y - 8) + ' Z '
+      : 'M' + (x - 2) + ' ' + (y - 22) + ' L' + (x - 16) + ' ' + (y - 15) + ' L' + (x - 2) + ' ' + (y - 8) + ' Z ';
+    if (lv === 1) {
+      for (let x = 95; x <= 435; x += 48) d += 'M' + x + ' ' + (c + 26) + ' L' + x + ' ' + (c - 4) + ' ';
+    } else if (lv === 2) {
+      d = 'M70 ' + c + ' L450 ' + c;
+    } else if (lv === 3) {
+      const v = i % 3;
+      if (v === 0) {
+        d = 'M70 ' + c;
+        for (let k = 1; k <= 10; k++) d += ' L' + (70 + 38 * k) + ' ' + (k === 10 ? c : (k % 2 ? c - 18 : c + 18));
+      } else if (v === 1) {
+        let x = 70, up = true;
+        sy = c - 16;
+        d = 'M70 ' + sy;
+        while (x < 450) {
+          x = Math.min(450, x + 50);
+          d += ' H' + x;
+          if (x < 450) { up = !up; d += ' V' + (up ? c - 16 : c + 16); }
+        }
+      } else {
+        d = 'M70 ' + c;
+        for (let k = 1; k <= 5; k++) d += ' L' + (70 + 76 * k) + ' ' + (k === 5 ? c : (k % 2 ? c - 24 : c + 24));
+      }
+    } else if (lv === 4) {
+      const v = i % 3;
+      d = 'M70 ' + c;
+      if (v === 0) {
+        for (let k = 0; k < 10; k++) { const x = 70 + 38 * k; d += ' Q' + (x + 19) + ' ' + (k % 2 ? c + 22 : c - 22) + ' ' + (x + 38) + ' ' + c; }
+      } else if (v === 1) {
+        for (let k = 0; k < 5; k++) { const x = 70 + 76 * k; d += ' Q' + (x + 38) + ' ' + (k % 2 ? c + 34 : c - 34) + ' ' + (x + 76) + ' ' + c; }
+      } else {
+        for (let k = 0; k < 10; k++) d += ' A19 19 0 0 1 ' + (70 + 38 * (k + 1)) + ' ' + c;
+      }
+    } else {
+      const shapes = ['circle', 'square', 'triangle', 'heart', 'star', 'house'];
+      const r = 44;
+      // 有引導線時每列只放兩個：左邊的從左紙邊進、右邊的從右紙邊進，不會有被包在中間的圖形
+      const centers = lead ? [130, 390] : [105, 260, 415];
+      centers.forEach((cx, j) => {
+        const s = shapes[(i * centers.length + j) % 6];
+        const cy = c;
+        // 最外側的入口點（左側圖形取最左點，右側圖形取最右點；以左側為準再鏡射）
+        let ex = r, ey = 0;
+        if (s === 'circle') d += 'M' + (cx - r) + ' ' + cy + ' A' + r + ' ' + r + ' 0 1 0 ' + (cx + r) + ' ' + cy + ' A' + r + ' ' + r + ' 0 1 0 ' + (cx - r) + ' ' + cy + ' Z ';
+        else if (s === 'square') { d += 'M' + (cx - r + 4) + ' ' + (cy - r + 4) + ' H' + (cx + r - 4) + ' V' + (cy + r - 4) + ' H' + (cx - r + 4) + ' Z '; ex = r - 4; }
+        else if (s === 'triangle') { d += 'M' + cx + ' ' + (cy - r) + ' L' + (cx + r) + ' ' + (cy + r - 4) + ' L' + (cx - r) + ' ' + (cy + r - 4) + ' Z '; ey = r - 4; }
+        else if (s === 'heart') {
+          d += 'M' + cx + ' ' + (cy + r) + ' C' + (cx - 1.6 * r) + ' ' + (cy - 0.15 * r) + ' ' + (cx - 0.75 * r) + ' ' + (cy - 1.35 * r) + ' ' + cx + ' ' + (cy - 0.45 * r) + ' C' + (cx + 0.75 * r) + ' ' + (cy - 1.35 * r) + ' ' + (cx + 1.6 * r) + ' ' + (cy - 0.15 * r) + ' ' + cx + ' ' + (cy + r) + ' Z ';
+          let best = [0, 0];
+          for (let t = 0; t <= 1; t += 0.01) {
+            const u = 1 - t;
+            const bx = 3 * u * u * t * (-1.6) + 3 * u * t * t * (-0.75);
+            const by = u * u * u * 1 + 3 * u * u * t * (-0.15) + 3 * u * t * t * (-1.35) + t * t * t * (-0.45);
+            if (bx < best[0]) best = [bx, by];
+          }
+          ex = -best[0] * r; ey = best[1] * r;
+        } else if (s === 'star') {
+          for (let k = 0; k < 10; k++) {
+            const a = -Math.PI / 2 + k * Math.PI / 5;
+            const rr = k % 2 ? r * 0.48 : r;
+            d += (k === 0 ? 'M' : 'L') + (cx + rr * Math.cos(a)).toFixed(1) + ' ' + (cy + rr * Math.sin(a)).toFixed(1) + ' ';
+          }
+          d += 'Z ';
+          ex = 0.951 * r; ey = -0.309 * r;
+        } else { d += 'M' + cx + ' ' + (cy - r) + ' L' + (cx + r) + ' ' + (cy - 0.1 * r) + ' V' + (cy + r) + ' H' + (cx - r) + ' V' + (cy - 0.1 * r) + ' Z '; ey = 0.45 * r; }
+        if (lead) {
+          const y = (cy + ey).toFixed(1);
+          if (j === 0) { ld += 'M' + L + ' ' + y + ' L' + (cx - ex).toFixed(1) + ' ' + y + ' '; arrow += arrowIn(L, cy + ey, 1); }
+          else { ld += 'M' + R + ' ' + y + ' L' + (cx + ex).toFixed(1) + ' ' + y + ' '; arrow += arrowIn(R, cy + ey, -1); }
+        }
+      });
+    }
+    if (lead && lv >= 2 && lv <= 4) {
+      ld = 'M' + L + ' ' + sy + ' L' + sx + ' ' + sy;
+      arrow = arrowIn(L, sy, 1);
+    }
+    const showIcons = lv >= 2 && lv <= 4;
+    return {
+      vb: L + ' 0 ' + (R - L) + ' ' + H,
+      d: d,
+      lead: ld || 'M0 0',
+      arrow: arrow || 'M0 0',
+      pathBand: d + ' ' + ld,
+      bandY: c - 26,
+      bandOp: lv === 1 ? 1 : 0,
+      iconOp: showIcons ? 1 : 0,
+      startT: lead ? 'translate(14 ' + (c - 62) + ')' : 'translate(12 ' + (c - 20) + ')',
+      endT: 'translate(472 ' + (c - 20) + ')',
+      scT: lv === 1 ? 'translate(78 ' + (c - 50) + ')' : 'translate(0 -100)',
+      scOp: lv === 1 ? 1 : 0
+    };
+  }
+
+  // ---------- 匯出：PDF 與 PPT ----------
+  rowSVG(row, v, wpx, hpx) {
+    const t = v.theme;
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + row.vb + '" width="' + wpx + '" height="' + hpx + '">' +
+      '<rect x="60" y="' + row.bandY + '" width="400" height="52" rx="4" fill="#FCE7B8" opacity="' + row.bandOp + '"/>' +
+      '<path d="' + row.pathBand + '" fill="none" stroke="#FFD65A" stroke-width="' + v.bandW + '" stroke-linecap="round" stroke-linejoin="round" opacity="' + v.bandOp + '"/>' +
+      '<path d="' + row.lead + '" fill="none" stroke="#E8553D" stroke-width="' + v.sw + '" stroke-linejoin="round" stroke-dasharray="' + v.dash + '" opacity="' + v.leadOp + '"/>' +
+      '<path d="' + row.arrow + '" fill="#E8553D" opacity="' + v.leadOp + '"/>' +
+      '<path d="' + row.d + '" fill="none" stroke="#1F2A44" stroke-width="' + v.sw + '" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="' + v.dash + '"/>' +
+      '<g transform="' + row.startT + '" opacity="' + row.iconOp + '"><path d="' + t.startD + '" fill="' + t.startFill + '" stroke="#1F2A44" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></g>' +
+      '<g transform="' + row.endT + '" opacity="' + row.iconOp + '"><path d="' + t.endD + '" fill="' + t.endFill + '" stroke="#1F2A44" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></g>' +
+      '<g transform="' + row.scT + '" opacity="' + row.scOp + '"><path d="M0 4 a4 4 0 1 0 0.1 0 M0 16 a4 4 0 1 0 0.1 0 M4 7 L18 14 M4 17 L18 10" fill="none" stroke="#C2412B" stroke-width="2" stroke-linecap="round"/></g>' +
+      '</svg>';
+  }
+
+  loadImg(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('image'));
+      img.src = src;
+    });
+  }
+
+  async svgToCanvas(svg, w, h) {
+    const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+    try {
+      const img = await this.loadImg(url);
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(w); cv.height = Math.round(h);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      return cv;
+    } finally { URL.revokeObjectURL(url); }
+  }
+
+  // 版面以預覽練習單的 560 × 792 px 為單位
+  sheetLayout(v) {
+    const rows = v.sheetRows;
+    const top = 70, bottom = 750;
+    const hs = rows.map((r) => { const p = r.vb.split(' ').map(Number); return p[3] * 560 / p[2]; });
+    const total = hs.reduce((a, b) => a + b, 0);
+    const gap = Math.max(0, (bottom - top - total) / rows.length);
+    let y = top + gap / 2;
+    return rows.map((r, i) => { const o = { row: r, y: y, h: hs[i] }; y += hs[i] + gap; return o; });
+  }
+
+  wrapText(ctx, text, maxW) {
+    const lines = []; let cur = '';
+    for (const ch of text) {
+      if (ctx.measureText(cur + ch).width > maxW && cur) { lines.push(cur); cur = ch; } else cur += ch;
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  }
+
+  async drawSheet(v, S) {
+    try { await document.fonts.load('700 20px "LXGW WenKai TC"'); await document.fonts.load('400 12px "Noto Sans TC"'); await document.fonts.ready; } catch (e) {}
+    const cv = document.createElement('canvas');
+    cv.width = Math.round(560 * S); cv.height = Math.round(792 * S);
+    const ctx = cv.getContext('2d');
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.scale(S, S);
+    ctx.fillStyle = '#1F2A44'; ctx.strokeStyle = '#1F2A44';
+    ctx.font = '700 17px "LXGW WenKai TC", "Noto Sans TC", sans-serif';
+    ctx.fillText('剪刀小高手・Lv' + v.lv.n + ' ' + v.lv.name, 22, 36);
+    ctx.font = '12px "Noto Sans TC", sans-serif';
+    ctx.fillText('姓名', 280, 36); ctx.fillText('日期', 440, 36);
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(308, 38); ctx.lineTo(428, 38); ctx.moveTo(468, 38); ctx.lineTo(538, 38); ctx.stroke();
+    if (v.name) { ctx.font = '14px "LXGW WenKai TC", sans-serif'; ctx.fillText(v.name, 312, 35); }
+    ctx.font = '11px "Noto Sans TC", sans-serif'; ctx.fillStyle = '#3C4760';
+    this.wrapText(ctx, v.story, 516).forEach((ln, i) => ctx.fillText(ln, 22, 56 + i * 15));
+    for (const it of this.sheetLayout(v)) {
+      const img = await this.svgToCanvas(this.rowSVG(it.row, v, 560 * S, it.h * S), 560 * S, it.h * S);
+      ctx.drawImage(img, 0, it.y, 560, it.h);
+    }
+    ctx.setLineDash([3, 3]); ctx.strokeStyle = '#9AA3B5'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, 758); ctx.lineTo(560, 758); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#3C4760'; ctx.font = '10px "Noto Sans TC", sans-serif';
+    ctx.fillText('我做到了  ☆ ☆ ☆', 22, 776);
+    ctx.textAlign = 'center'; ctx.fillText('大拇指朝天空，一口一口往前走', 280, 776);
+    ctx.textAlign = 'right'; ctx.fillText('老師：＿＿＿', 538, 776);
+    return cv;
+  }
+
+  async saveFile(filename, blob) {
+    const dl = await claude.use('downloads');
+    if (!dl) { this.setState({ busy: false, msg: '這個檢視畫面無法下載檔案，請改用「列印」另存成 PDF。' }); return; }
+    try {
+      await dl.save({ filename: filename, data: blob });
+      this.setState({ busy: false, msg: '已下載：' + filename });
+    } catch (e) {
+      const code = e && e.code;
+      this.setState({ busy: false, msg: code === 'declined' ? '已取消下載。' : (code === 'rate_limited' ? '下載視窗已開啟，請先處理它。' : '下載失敗，請再試一次。') });
+    }
+  }
+
+  fileBase(v) { return '剪刀練習單-Lv' + v.lv.n + '-' + v.lv.name; }
+
+  async exportPdf() {
+    const v = this._v; if (!v || this.state.busy) return;
+    if (!window.jspdf) { this.setState({ msg: 'PDF 工具還在載入，請稍候再按一次。' }); return; }
+    this.setState({ busy: true, msg: '正在製作 PDF…' });
+    try {
+      const cv = await this.drawSheet(v, 2480 / 560);
+      const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+      doc.addImage(cv.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297);
+      await this.saveFile(this.fileBase(v) + '.pdf', doc.output('blob'));
+    } catch (e) { this.setState({ busy: false, msg: 'PDF 製作失敗，請改用「列印」另存成 PDF。' }); }
+  }
+
+  async exportPpt() {
+    const v = this._v; if (!v || this.state.busy) return;
+    if (!window.PptxGenJS) { this.setState({ msg: 'PPT 工具還在載入，請稍候再按一次。' }); return; }
+    this.setState({ busy: true, msg: '正在製作 PPT…' });
+    try {
+      const pptx = new window.PptxGenJS();
+      pptx.defineLayout({ name: 'A4P', width: 8.27, height: 11.69 });
+      pptx.layout = 'A4P';
+      const K = 8.27 / 560;
+      const F = 'Microsoft JhengHei';
+      const ink = '1F2A44', soft = '3C4760';
+
+      // 第 1 頁：練習單（文字可編輯，每條練習線是可移動的圖片）
+      const s1 = pptx.addSlide();
+      s1.addText('剪刀小高手・Lv' + v.lv.n + ' ' + v.lv.name, { x: 22 * K, y: 14 * K, w: 250 * K, h: 30 * K, fontFace: F, fontSize: 18, bold: true, color: ink, margin: 0 });
+      s1.addText('姓名：' + (v.name || '＿＿＿＿＿＿') + '　日期：＿＿＿＿', { x: 280 * K, y: 14 * K, w: 258 * K, h: 30 * K, fontFace: F, fontSize: 12, color: ink, align: 'right', margin: 0 });
+      s1.addText(v.story, { x: 22 * K, y: 44 * K, w: 516 * K, h: 24 * K, fontFace: F, fontSize: 10, color: soft, margin: 0, valign: 'top' });
+      for (const it of this.sheetLayout(v)) {
+        const cv = await this.svgToCanvas(this.rowSVG(it.row, v, 1680, it.h * 3), 1680, it.h * 3);
+        s1.addImage({ data: cv.toDataURL('image/png'), x: 0, y: it.y * K, w: 8.27, h: it.h * K });
+      }
+      s1.addShape(pptx.ShapeType.line, { x: 0, y: 758 * K, w: 8.27, h: 0, line: { color: '9AA3B5', width: 0.75, dashType: 'dash' } });
+      s1.addText('我做到了  ☆ ☆ ☆', { x: 22 * K, y: 764 * K, w: 160 * K, h: 18 * K, fontFace: F, fontSize: 9, color: soft, margin: 0 });
+      s1.addText('大拇指朝天空，一口一口往前走', { x: 180 * K, y: 764 * K, w: 200 * K, h: 18 * K, fontFace: F, fontSize: 9, color: soft, align: 'center', margin: 0 });
+      s1.addText('老師：＿＿＿', { x: 400 * K, y: 764 * K, w: 138 * K, h: 18 * K, fontFace: F, fontSize: 9, color: soft, align: 'right', margin: 0 });
+
+      // 第 2 頁：教案
+      const L = v.lesson;
+      const s2 = pptx.addSlide();
+      s2.addText('Lv' + v.lv.n + '「' + L.title + '」教案', { x: 0.5, y: 0.4, w: 7.27, h: 0.6, fontFace: F, fontSize: 24, bold: true, color: ink });
+      s2.addText('適用：' + v.lv.age + '　時間：30 分鐘　人數：小組 4–6 人', { x: 0.5, y: 1.0, w: 7.27, h: 0.35, fontFace: F, fontSize: 12, color: soft });
+      const blocks = [
+        ['教學目標', L.goals],
+        ['準備材料', L.materials],
+        ['活動流程', L.flow.map((f) => f.stage + '（' + f.min + ' 分）：' + f.text)],
+        ['引導語', L.lines.map((x) => '「' + x + '」')],
+        ['觀察評量', L.observe.map((x) => '□ ' + x)],
+        ['延伸活動', L.extend]
+      ];
+      const runs = [];
+      blocks.forEach(([h, items]) => {
+        runs.push({ text: h, options: { bold: true, fontSize: 14, color: 'C2412B', breakLine: true, paraSpaceBefore: 8 } });
+        items.forEach((it) => runs.push({ text: it, options: { fontSize: 11, color: ink, bullet: h === '觀察評量' ? false : true, breakLine: true } }));
+      });
+      s2.addText(runs, { x: 0.5, y: 1.45, w: 7.27, h: 9.8, fontFace: F, valign: 'top', lineSpacingMultiple: 1.15 });
+
+      // 第 3 頁：剪刀六大約定
+      const s3 = pptx.addSlide();
+      s3.addText('我們的剪刀約定', { x: 0.5, y: 0.5, w: 4.2, h: 1.0, fontFace: F, fontSize: 36, bold: true, color: ink });
+      try {
+        const hero = await this.loadImg('/_blob/b81c5ad41c5b3691b830031d44b94cc4');
+        const hc = document.createElement('canvas'); hc.width = 1680; hc.height = 944;
+        hc.getContext('2d').drawImage(hero, 0, 0, 1680, 944);
+        s3.addImage({ data: hc.toDataURL('image/jpeg', 0.9), x: 4.4, y: 0.4, w: 3.4, h: 1.91 });
+      } catch (e) {}
+      const rules = [
+        ['用圓頭剪刀', '老師給的安全剪刀'], ['坐好才剪', '拿剪刀不走路、不跑跳'], ['刀尖朝下', '要移動時合起來、握住刀刃'],
+        ['握柄給別人', '遞剪刀時，自己握刀刃'], ['嘴巴只吃紙', '不剪頭髮、衣服和身體'], ['用完送回家', '放回剪刀筒、紙屑進盒子']
+      ];
+      rules.forEach(([a, b], i) => {
+        const x = 0.5 + (i % 2) * 3.7, y = 2.7 + Math.floor(i / 2) * 2.0;
+        s3.addShape(pptx.ShapeType.roundRect, { x: x, y: y, w: 3.5, h: 1.8, rectRadius: 0.2, fill: { color: 'FFFFFF' }, line: { color: ink, width: 2 } });
+        s3.addText([{ text: (i + 1) + '. ' + a, options: { fontSize: 22, bold: true, color: ink, breakLine: true } }, { text: b, options: { fontSize: 13, color: soft } }], { x: x + 0.15, y: y + 0.15, w: 3.2, h: 1.5, fontFace: F, valign: 'middle' });
+      });
+      s3.addText('大拇指朝天空，嘴巴張開、閉起來，一口一口往前走！', { x: 0.5, y: 8.9, w: 7.27, h: 1.0, fontFace: F, fontSize: 18, bold: true, color: 'FFFFFF', fill: { color: ink }, align: 'center' });
+      s3.addText('我會遵守約定，簽名：＿＿＿＿＿＿＿＿＿＿', { x: 0.5, y: 10.3, w: 7.27, h: 0.6, fontFace: F, fontSize: 16, bold: true, color: ink });
+
+      const blob = await pptx.write({ outputType: 'blob' });
+      await this.saveFile(this.fileBase(v) + '.pptx', blob);
+    } catch (e) { this.setState({ busy: false, msg: 'PPT 製作失敗，請再試一次。' }); }
+  }
+
+  renderVals() {
+    const s = this.state;
+    const LEVELS = [
+      { n: 1, name: '剪一刀', age: '約 2.5–3 歲', skill: '一次開合，把窄紙條「喀嚓」剪斷。', ready: '能連續剪斷 5 條紙條，握法正確。', mini: 'M24 48 V20 M52 48 V20 M80 48 V20 M108 48 V20 M136 48 V20' },
+      { n: 2, name: '剪直線', age: '約 3–3.5 歲', skill: '沿著直線連續開合，一路剪到終點。', ready: '剪痕偏離線不超過 0.5 公分。', mini: 'M14 28 H146' },
+      { n: 3, name: '轉彎線', age: '約 3.5–4 歲', skill: '剪折線與直角：到轉角停下、轉紙再剪。', ready: '轉角處能停住，不剪過頭。', mini: 'M14 28 L36 12 L58 44 L80 12 L102 44 L124 12 L146 28' },
+      { n: 4, name: '剪曲線', age: '約 4–5 歲', skill: '輔助手慢慢轉紙，剪出波浪與圓弧。', ready: '曲線平順，沒有明顯折角。', mini: 'M14 28 Q36 6 58 28 T102 28 T146 28' },
+      { n: 5, name: '剪形狀', age: '約 5–6 歲', skill: '把圓形、方形、愛心、星星完整剪下。', ready: '能先粗剪再修邊，形狀完整。', mini: 'M28 28 m-16 0 a16 16 0 1 0 32 0 a16 16 0 1 0 -32 0 M66 12 H98 V44 H66 Z M130 10 L146 44 H114 Z' }
+    ];
+    const THEMES = {
+      ocean: { name: '海洋：小魚回家', go: '幫小魚沿著線游回貝殼家！從左邊的小魚開始剪。', startD: 'M4 20 C 10 8, 26 8, 30 20 C 26 32, 10 32, 4 20 Z M30 20 L39 11 L39 29 Z M11 18 L11.1 18', startFill: '#7FB3DE', endD: 'M20 5 L4 29 Q20 38 36 29 Z M20 5 L12 31 M20 5 L20 34 M20 5 L28 31', endFill: '#F6B93B' },
+      forest: { name: '森林：毛毛蟲找葉子', go: '幫毛毛蟲沿著線爬到大葉子上！從左邊的毛毛蟲開始剪。', startD: 'M2 24 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0 Z M12 24 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0 Z M22 21 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0 Z M28 13 L26 6 M33 13 L35 6', startFill: '#F6B93B', endD: 'M4 36 C 4 14, 18 4, 38 4 C 38 24, 26 36, 4 36 Z M4 36 L30 12', endFill: '#7CC08A' },
+      space: { name: '太空：火箭飛星星', go: '帶火箭沿著線飛到亮晶晶的星星！從左邊的火箭開始剪。', startD: 'M38 20 C 30 30, 14 30, 8 26 L8 14 C 14 10, 30 10, 38 20 Z M14 14 L4 6 L8 14 M14 26 L4 34 L8 26 M22 20 a3 3 0 1 0 0.1 0', startFill: '#F28B76', endD: 'M20 2 L25 14 L38 15 L28 24 L31 37 L20 30 L9 37 L12 24 L2 15 L15 14 Z', endFill: '#F6B93B' }
+    };
+    const LESSONS = {
+      1: { title: '喀嚓喀嚓小草地',
+        goals: ['認識剪刀的部位與六大約定。', '用「大拇指朝天空」的握法做出開合。', '一刀剪斷 2–3 公分寬的紙條。'],
+        materials: ['圓頭兒童剪刀（含左手剪刀）', '2.5 公分寬的厚卡紙條', 'Lv1 練習單', '紙屑盒、膠水、綠色畫紙'],
+        flow: [
+          { stage: '引起動機', min: 5, text: '拿出剪刀筒，用「剪刀寶寶」介紹嘴巴與耳朵；一起念六大約定並做動作。' },
+          { stage: '示範引導', min: 8, text: '坐在孩子旁同方向示範握法；空剪「打開—閉起來」，再用夾子夾棉球暖身。' },
+          { stage: '實作練習', min: 12, text: '把紙條剪成一根根小草，老師巡視調整握法；剪下的小草貼在綠色畫紙上成為草地。' },
+          { stage: '分享收拾', min: 5, text: '數一數剪了幾根草；合起剪刀、刀尖朝下送回剪刀筒，老師點數剪刀數量。' }
+        ],
+        lines: ['剪刀嘴巴只吃紙。', '大拇指朝天空，打開——閉起來！', '另一隻手是好幫手，幫忙拿住紙。'],
+        observe: ['大拇指在上方握孔', '能單手做出開合', '輔助手會扶住紙', '全程坐著使用剪刀'],
+        extend: ['剪吸管做串珠項鍊。', '剪黏土條「切麵條」扮家家酒。'] },
+      2: { title: '送小動物回家',
+        goals: ['沿直線連續開合往前剪。', '輔助手穩定扶紙。', '剪到終點能自己停下。'],
+        materials: ['圓頭兒童剪刀', 'Lv2 練習單（先粗線、再細線）', '紙屑盒', '小貼紙'],
+        flow: [
+          { stage: '引起動機', min: 5, text: '說故事：小動物迷路了，要沿著小路才能回家；請孩子用手指先「走」一次線。' },
+          { stage: '示範引導', min: 8, text: '示範剪刀嘴巴張大大、咬住線，一口一口往前走；提醒不要只用刀尖小口剪。' },
+          { stage: '實作練習', min: 12, text: '每剪完一條就幫小動物貼一張貼紙；完成粗線可挑戰細線版。' },
+          { stage: '分享收拾', min: 5, text: '比一比誰的小路最直，互相說一句讚美；剪刀送回家、紙屑回收。' }
+        ],
+        lines: ['嘴巴張大大，咬住線。', '眼睛看前面的線喔。', '走到家了，停！'],
+        observe: ['剪口連續不中斷', '偏離線 0.5 公分以內', '會在終點停下', '紙屑放進紙屑盒'],
+        extend: ['剪色紙條串成紙鍊裝飾教室。', '剪舊報紙當作「麵條」玩煮麵遊戲。'] },
+      3: { title: '彎彎折折小山路',
+        goals: ['剪到轉角能停下。', '理解「紙轉，剪刀不轉」。', '剪出折線與直角。'],
+        materials: ['圓頭兒童剪刀', 'Lv3 練習單', '地上貼好折線的紙膠帶', '紙屑盒'],
+        flow: [
+          { stage: '引起動機', min: 5, text: '請孩子沿著地上的折線膠帶走，遇到轉角先停一下、轉身再走。' },
+          { stage: '示範引導', min: 8, text: '示範：剪到轉角→剪刀停住張開→輔助手轉紙→繼續剪。邊做邊說「停、轉、走」。' },
+          { stage: '實作練習', min: 12, text: '依序剪小山、方塊路與大山；老師在轉角處提醒「停」。' },
+          { stage: '分享收拾', min: 5, text: '把剪好的山路排成一座大山脈；收拾剪刀與紙屑。' }
+        ],
+        lines: ['到轉角，停！', '轉紙，不轉剪刀。', '手肘靠近身體，剪刀朝前面。'],
+        observe: ['會在轉角停住', '輔助手主動轉紙', '剪刀保持朝前', '轉角不剪過頭'],
+        extend: ['剪鋸齒邊做國王皇冠。', '剪閃電圖案布置天氣角。'] },
+      4: { title: '海浪與彩虹',
+        goals: ['小幅連續轉紙，剪出曲線。', '雙手協調配合。', '能放慢速度、維持專注。'],
+        materials: ['圓頭兒童剪刀', 'Lv4 練習單', '藍色與彩色紙', '大張海報紙、膠水'],
+        flow: [
+          { stage: '引起動機', min: 5, text: '隨音樂用手臂在空中畫波浪，感受「彎彎的」動作。' },
+          { stage: '示範引導', min: 8, text: '示範小口小口剪，輔助手配合慢慢轉紙；說明剪太快會變成尖角。' },
+          { stage: '實作練習', min: 12, text: '剪小波浪、大波浪與圓弧邊；完成後挑戰在色紙上自己畫波浪來剪。' },
+          { stage: '分享收拾', min: 5, text: '把波浪貼成一片大海報，請孩子說說自己的浪；收拾整理。' }
+        ],
+        lines: ['小口小口剪，紙慢慢轉。', '眼睛跟著彎彎的線走。', '慢慢來，剪得美比剪得快重要。'],
+        observe: ['小幅連續轉紙', '曲線平順無折角', '能控制速度', '坐姿與握法穩定'],
+        extend: ['剪螺旋線做會轉的小蛇。', '剪大圓做太陽，再剪光芒。'] },
+      5: { title: '形狀拼貼畫',
+        goals: ['完整剪下封閉形狀。', '學會「先剪大塊，再剪形狀」的步驟。', '用剪下的形狀創作並說故事。'],
+        materials: ['圓頭兒童剪刀', 'Lv5 練習單（可印在彩色紙上）', '圖畫紙、膠水', '紙屑盒'],
+        flow: [
+          { stage: '引起動機', min: 5, text: '形狀猜猜看：老師從袋子摸出圓形、方形、愛心、星星，請孩子說出名字。' },
+          { stage: '示範引導', min: 8, text: '示範先沿外圍剪成一小塊，再沿線繞一圈回到起點；星星尖角要「停、轉」。' },
+          { stage: '實作練習', min: 12, text: '孩子剪下形狀，在圖畫紙上拼成房子、機器人或花園。' },
+          { stage: '分享收拾', min: 5, text: '每位孩子介紹作品；收拾剪刀、點數數量。' }
+        ],
+        lines: ['先剪大塊，再剪形狀。', '繞著形狀走一圈，回到起點。', '尖尖的角，停一下、轉一轉。'],
+        observe: ['能先粗剪再修邊', '起點與終點能接合', '形狀完整無剪斷', '能說出形狀名稱'],
+        extend: ['剪雜誌圖片做拼貼。', '對摺色紙剪雪花或愛心。'] }
+    };
+
+    const lvObj = LEVELS[s.lv - 1];
+    const theme = THEMES[s.theme];
+    const pad = s.band ? s.bandW / 2 : 0;
+    const lead = s.lead && s.lv >= 2;
+    let H, c;
+    if (s.lv === 1) { H = 92; c = 46; }
+    else if (s.lv === 5) { H = 88 + 2 * pad + 20; c = H / 2; }
+    else { H = 92 + (s.band ? s.bandW : 0) + (lead ? 28 : 0); c = lead ? H / 2 + 14 : H / 2; }
+    // 條數一律照選擇產生；放不下一張 A4 時整列等比例縮小，左右邊界仍是紙張邊緣
+    const nRows = s.rows;
+    const fit = Math.min(1, 650 / (nRows * H));
+    const W = 560 / fit;
+    const edgeL = 260 - W / 2, edgeR = 260 + W / 2;
+    const sheetRows = [];
+    for (let i = 0; i < nRows; i++) sheetRows.push(this.makeRow(s.lv, i, H, c, { lead: lead, pad: pad, L: edgeL, R: edgeR }));
+    const weightMap = { thick: 7, mid: 4.5, thin: 2.5 };
+    let story = theme.go;
+    if (s.lv === 1) story = '喀嚓！沿著每一條虛線剪一刀，把黃色紙條剪成一根根小草。';
+    if (s.lv === 5) story = '沿著線把形狀剪下來，先剪大塊、再剪形狀，最後拼成一幅畫！';
+    if (lead && s.lv === 5) story = '左邊的形狀從紙的左邊緣、右邊的形狀從右邊緣，沿紅色引導線剪進去，再繞形狀一圈！';
+    else if (lead) story += '從紙的左邊緣，沿紅色引導線剪進來。';
+    if (s.band) story += '剪在黃色路裡就成功！';
+    const nm = s.name;
+
+    const v = {
+      levels: LEVELS.map((l) => ({
+        ...l,
+        cls: l.n === s.lv ? 'lvcard on' : 'lvcard',
+        pillCls: l.n === s.lv ? 'pill on' : 'pill',
+        pick: () => this.setState({ lv: l.n })
+      })),
+      themes: Object.keys(THEMES).map((k) => ({
+        name: THEMES[k].name,
+        cls: k === s.theme ? 'pill on' : 'pill',
+        pick: () => this.setState({ theme: k })
+      })),
+      rowOpts: [3, 4, 5, 6].map((n) => ({ label: n + ' 條', cls: n === s.rows ? 'pill on' : 'pill', pick: () => this.setState({ rows: n }) })),
+      weights: [['thick', '粗線'], ['mid', '中線'], ['thin', '細線']].map(([k, label]) => ({ label: label, cls: k === s.weight ? 'pill on' : 'pill', pick: () => this.setState({ weight: k }) })),
+      dashOpts: [[true, '虛線'], [false, '實線']].map(([v, label]) => ({ label: label, cls: v === s.dashed ? 'pill on' : 'pill', pick: () => this.setState({ dashed: v }) })),
+      name: nm,
+      onName: (e) => this.setState({ name: e.target.value }),
+      doPrint: () => { try { window.print(); } catch (err) {} },
+      lv: lvObj,
+      theme: theme,
+      story: story,
+      sheetRows: sheetRows,
+      sw: weightMap[s.weight],
+      dash: s.dashed ? (s.weight === 'thin' ? '8 7' : '14 10') : 'none',
+      band: s.band,
+      bandW: s.bandW,
+      bandOp: s.band ? 0.9 : 0,
+      bandMm: Math.round(s.bandW * 0.33),
+      onBandW: (e) => this.setState({ bandW: Number(e.target.value) }),
+      bandOpts: [[false, '不顯示'], [true, '顯示黃色剪刀路']].map(([v, label]) => ({ label: label, cls: v === s.band ? 'pill on' : 'pill', pick: () => this.setState({ band: v }) })),
+      leadOp: lead ? 1 : 0,
+      leadOpts: [[false, '不加'], [true, '加上引導線']].map(([v, label]) => ({ label: label, cls: v === s.lead ? 'pill on' : 'pill', pick: () => this.setState({ lead: v }) })),
+      leadHint: s.lv === 1 ? 'Lv1 剪一刀本來就是從紙條邊緣剪進去，不需要引導線。' : (s.lv === 5 ? '形狀等級：每列改放兩個形狀，左邊的從紙張左邊緣、右邊的從右邊緣引導進去，不會有卡在中間進不去的形狀。' : '紅色引導線從紙張最左邊緣一路連到起點，孩子一看就知道從哪裡下刀。'),
+      rowsCls: lead ? 'rows bleed' : 'rows',
+      clamped: fit < 1,
+      lesson: LESSONS[s.lv],
+      busy: s.busy,
+      msg: s.msg,
+      hasMsg: !!s.msg,
+      doPdf: () => this.exportPdf(),
+      doPpt: () => this.exportPpt()
+    };
+    this._v = v;
+    return v;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760">
+  <defs>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#1F2A44" fill-opacity="0.07"/>
+    </pattern>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1F2A44" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <!-- background blobs -->
+  <path d="M120 140 C 260 20, 520 40, 640 120 C 780 210, 1000 90, 1110 220 C 1210 340, 1150 560, 1010 640 C 860 730, 620 690, 470 700 C 290 712, 110 660, 70 500 C 34 360, 20 230, 120 140 Z" fill="#FCE7B8"/>
+  <path d="M120 140 C 260 20, 520 40, 640 120 C 780 210, 1000 90, 1110 220 C 1210 340, 1150 560, 1010 640 C 860 730, 620 690, 470 700 C 290 712, 110 660, 70 500 C 34 360, 20 230, 120 140 Z" fill="url(#dots)"/>
+  <circle cx="1010" cy="150" r="70" fill="#CFE6D3"/>
+  <circle cx="160" cy="610" r="56" fill="#D6E7F5"/>
+
+  <!-- paper sheet -->
+  <g transform="translate(250 190) rotate(-6)" filter="url(#soft)">
+    <rect x="0" y="0" width="640" height="420" rx="18" fill="#FFFFFF"/>
+    <rect x="0" y="0" width="640" height="420" rx="18" fill="none" stroke="#1F2A44" stroke-opacity="0.08" stroke-width="2"/>
+    <!-- straight practice line (done) -->
+    <path d="M60 90 L580 90" stroke="#4A90C9" stroke-width="7" stroke-linecap="round" stroke-dasharray="16 14"/>
+    <!-- wave line being cut -->
+    <path d="M60 210 Q 100 160 140 210 T 220 210 T 300 210" stroke="#E8553D" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M300 210 Q 340 260 380 210 T 460 210 T 540 210 T 600 210" stroke="#E8553D" stroke-width="7" stroke-linecap="round" stroke-dasharray="16 14" fill="none"/>
+    <!-- zigzag -->
+    <path d="M60 330 L110 300 L160 360 L210 300 L260 360 L310 300 L360 360 L410 300 L460 360 L510 300 L560 330" stroke="#5BA36B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="16 14" fill="none"/>
+    <!-- start/finish markers -->
+    <circle cx="60" cy="90" r="14" fill="#F6B93B"/>
+    <circle cx="60" cy="210" r="14" fill="#F6B93B"/>
+    <circle cx="60" cy="330" r="14" fill="#F6B93B"/>
+  </g>
+
+  <!-- curled cut strip -->
+  <path d="M286 262 C 330 230, 390 236, 430 262 C 470 290, 520 272, 548 250 L 560 280 C 520 318, 462 320, 420 296 C 380 272, 330 276, 300 300 Z" fill="#FFF3E6" stroke="#1F2A44" stroke-opacity="0.12" stroke-width="2"/>
+
+  <!-- scissors mascot -->
+  <g transform="translate(612 404)">
+    <!-- lower blade -->
+    <g transform="rotate(-8)">
+      <path d="M-10 -16 L250 -10 Q 290 0 250 12 L-10 18 Z" fill="#E9EEF5" stroke="#1F2A44" stroke-width="6" stroke-linejoin="round"/>
+    </g>
+    <!-- upper blade -->
+    <g transform="rotate(-30)">
+      <path d="M-10 -18 L250 -12 Q 290 -2 250 10 L-10 16 Z" fill="#F7F9FC" stroke="#1F2A44" stroke-width="6" stroke-linejoin="round"/>
+    </g>
+    <!-- handles -->
+    <g transform="rotate(-8)">
+      <path d="M-10 0 L-90 26" stroke="#4A90C9" stroke-width="34" stroke-linecap="round"/>
+      <ellipse cx="-150" cy="44" rx="72" ry="54" fill="none" stroke="#4A90C9" stroke-width="30"/>
+      <ellipse cx="-150" cy="44" rx="72" ry="54" fill="none" stroke="#1F2A44" stroke-width="5" stroke-opacity="0.9"/>
+      <ellipse cx="-150" cy="44" rx="42" ry="26" fill="none" stroke="#1F2A44" stroke-width="5" stroke-opacity="0.9"/>
+    </g>
+    <g transform="rotate(-30)">
+      <path d="M-10 0 L-80 -20" stroke="#E8553D" stroke-width="34" stroke-linecap="round"/>
+      <circle cx="-132" cy="-38" r="54" fill="none" stroke="#E8553D" stroke-width="30"/>
+      <circle cx="-132" cy="-38" r="54" fill="none" stroke="#1F2A44" stroke-width="5"/>
+      <circle cx="-132" cy="-38" r="25" fill="none" stroke="#1F2A44" stroke-width="5"/>
+    </g>
+    <!-- pivot face -->
+    <circle cx="0" cy="0" r="40" fill="#F6B93B" stroke="#1F2A44" stroke-width="6"/>
+    <circle cx="-13" cy="-6" r="5" fill="#1F2A44"/>
+    <circle cx="13" cy="-6" r="5" fill="#1F2A44"/>
+    <path d="M-12 10 Q 0 22 12 10" stroke="#1F2A44" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <circle cx="-24" cy="8" r="6" fill="#E8553D" fill-opacity="0.45"/>
+    <circle cx="24" cy="8" r="6" fill="#E8553D" fill-opacity="0.45"/>
+  </g>
+
+  <!-- confetti cutouts -->
+  <path d="M960 330 L974 362 L1008 365 L982 388 L990 422 L960 404 L930 422 L938 388 L912 365 L946 362 Z" fill="#F6B93B" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M1030 520 C 1000 492, 1030 462, 1050 486 C 1070 462, 1100 492, 1070 520 L 1050 540 Z" fill="#E8553D" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M150 300 C 150 250, 190 220, 240 220 C 240 270, 210 300, 150 300 Z M150 300 L220 238" fill="#5BA36B" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/>
+  <rect x="880" y="560" width="54" height="54" rx="6" transform="rotate(14 907 587)" fill="#4A90C9" stroke="#1F2A44" stroke-width="5"/>
+  <circle cx="200" cy="470" r="26" fill="#F6B93B" stroke="#1F2A44" stroke-width="5"/>
+  <path d="M1080 270 l10 -24 l10 24 l24 10 l-24 10 l-10 24 l-10 -24 l-24 -10 Z" fill="#FFFFFF" stroke="#1F2A44" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M110 380 l7 -17 l7 17 l17 7 l-17 7 l-7 17 l-7 -17 l-17 -7 Z" fill="#FFFFFF" stroke="#1F2A44" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- scrap tray -->
+  <g transform="translate(700 600)">
+    <path d="M0 0 H200 L184 60 H16 Z" fill="#CFE6D3" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M30 0 L50 -22 L64 0 M90 0 Q 100 -30 120 0 M140 0 L156 -18 L170 0" stroke="#1F2A44" stroke-width="4" fill="#FFF3E6" stroke-linejoin="round"/>
+  </g>
+</svg>
